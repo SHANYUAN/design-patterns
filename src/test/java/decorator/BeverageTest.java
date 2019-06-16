@@ -7,6 +7,7 @@ import decorator.condiments.Soy;
 import decorator.condiments.Whip;
 import org.junit.Test;
 
+import static decorator.beverages.Beverage.Size.GRANDE;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -59,7 +60,7 @@ public class BeverageTest {
         Soy darkRoastWithSoy = new Soy(darkRoast);
 
         assertThat(darkRoastWithSoy.getDescription(), is("Dark Roast Coffee, Soy"));
-        assertThat(darkRoastWithSoy.cost(), is(1.14));
+        assertThat(darkRoastWithSoy.cost(), is(1.09));
     }
 
     @Test
@@ -91,5 +92,14 @@ public class BeverageTest {
         beverage = new CondimentPrettyPrint(beverage);
 
         assertThat(beverage.getDescription(), is("Dark Roast Coffee, Double Mocha and Whip"));
+    }
+
+    @Test
+    public void grandeDecafWithSoy() {
+        Beverage beverage = new Decaf();
+        beverage.setSize(GRANDE);
+        beverage = new Soy(beverage);
+
+        assertThat(beverage.cost(), is(1.05 + .15));
     }
 }
